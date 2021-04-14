@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -13,6 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $admin = Role::create(['name'=>'admin']);
+        $super_admin  = Role::create(['name'=>'super_admin']);
+        $admin_create =  User::factory()->admin()->create();
+        $super_admin_create =  User::factory()->super_admin()->create();
+        $admin_create->assignRole($admin);
+        $super_admin_create->assignRole($super_admin);
     }
 }
