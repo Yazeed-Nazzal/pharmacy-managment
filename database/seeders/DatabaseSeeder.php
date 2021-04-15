@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Drug;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
@@ -21,5 +22,7 @@ class DatabaseSeeder extends Seeder
         $super_admin_create =  User::factory()->super_admin()->create();
         $admin_create->assignRole($admin);
         $super_admin_create->assignRole($super_admin);
+
+        Drug::factory()->count(10)->create();
     }
 }
