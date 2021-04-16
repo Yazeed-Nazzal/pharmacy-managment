@@ -17,6 +17,16 @@ Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'login'])->na
 
 Auth::routes(["register"=>false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/statistices',[App\Http\Controllers\StatisticesController::class,'statistices'])->name('statistices');
+    Route::resource('drug',App\Http\Controllers\DrugController::class);
+    Route::resource('admin',App\Http\Controllers\AdminController::class);
+    Route::resource('super_admin',App\Http\Controllers\SuperAdminController::class);
+    Route::get('/search',[App\Http\Controllers\SearchController::class , 'search'])->name('search');
+    Route::post('/filter',[App\Http\Controllers\SearchController::class , 'search'])->name('filter');
+});
+
+
 
 

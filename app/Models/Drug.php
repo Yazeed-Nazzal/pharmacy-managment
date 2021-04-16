@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Drug extends Model
 {
     use HasFactory;
+
+    protected $table="drugs";
+
+    protected $guarded = [];
+
+    public function image(){
+        return $this->morphOne('App\Models\Image','imageable');
+    }
 }

@@ -14,7 +14,8 @@ class DrugController extends Controller
      */
     public function index()
     {
-        //
+        $drugs = Drug::all();
+        return view("drug.index",compact('drugs'));
     }
 
     /**
@@ -24,7 +25,7 @@ class DrugController extends Controller
      */
     public function create()
     {
-        //
+        return view('drug.create');
     }
 
     /**
@@ -35,7 +36,37 @@ class DrugController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name'=>'required',
+            's_name'=>'required',
+            'description'=>'required',
+            'price'=>'required',
+            'count'=>'required',
+            'expired_date'=>'required',
+            'place'=>'required',
+            'image_drug'=>'required'
+        ]);
+
+         $drug = Drug::create([
+            'name'=>$data['name'],
+            's_name'=>$data['s_name'],
+            'description'=>$data['description'],
+            'price'=>$data['price'],
+            'count'=>$data['count'],
+            'expired_date'=>$data['expired_date'],
+            'place'=>$data['place'],
+            'buying_count'=>0,
+        ]);
+
+        if($request->hasFile('image_drug')){
+            $image_name = rand(0,9999).'_'.$request->image_drug->getClientOriginalName();
+            $request->image_drug->move(public_path('uploads'),$image_name);
+            $drug->image()->create(array('name' => $image_name));   
+        }
+        
+        session()->flash('success','Add Drug Successfully');
+
+        return redirect()->route('drug.index');
     }
 
     /**
@@ -46,7 +77,7 @@ class DrugController extends Controller
      */
     public function show(Drug $drug)
     {
-        //
+        return view('drug.show',compact('drug'));
     }
 
     /**
@@ -57,7 +88,8 @@ class DrugController extends Controller
      */
     public function edit(Drug $drug)
     {
-        //
+        
+        return view('drug.edit',compact('drug'));
     }
 
     /**
@@ -69,7 +101,35 @@ class DrugController extends Controller
      */
     public function update(Request $request, Drug $drug)
     {
-        //
+        $data = $request->validate([
+            'name'=>'required',
+            's_name'=>'required',
+            'description'=>'required',
+            'price'=>'required',
+            'count'=>'required',
+            'expired_date'=>'required',
+            'place'=>'required',
+        ]);
+
+           $drug->update([
+            'name'=>$data['name'],
+            's_name'=>$data['s_name'],
+            'description'=>$data['description'],
+            'price'=>$data['price'],
+            'count'=>$data['count'],
+            'expired_date'=>$data['expired_date'],
+            'place'=>$data['place'],
+        ]);
+
+        if($request->hasFile('image_drug')){
+            $image_name = rand(0,9999).'_'.$request->image_drug->getClientOriginalName();
+            $request->image_drug->move(public_path('uploads'),$image_name);
+            $drug->image()->create(array('name' => $image_name));   
+        }
+        
+        session()->flash('success','Update Drug Information Successfully');
+
+        return redirect()->route('drug.index');
     }
 
     /**
@@ -80,6 +140,8 @@ class DrugController extends Controller
      */
     public function destroy(Drug $drug)
     {
-        //
+        $drug->delete();
+        session()->flash('success','Delete Drug Successfully');
+        return redirect()->route('drug.index');
     }
 }
