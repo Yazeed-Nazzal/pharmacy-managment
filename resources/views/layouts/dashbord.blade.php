@@ -80,6 +80,7 @@
             <li><a href="tables.html"> <i class="fas fa-cart-arrow-down mr-2"></i>Cart</a></li>
             <li><a href="{{route('search')}}"> <i class="fas fa-search mr-2"></i>Search</a></li>
             <li><a href="{{route('drug.index')}}"> <i class="fas fa-capsules mr-2 "></i>Drugs </a></li>
+            <li><a href="{{route('alternative_drug.index')}}"><i class="fas fa-pills mr-2"></i>Alternative Drugs </a></li>
             <li><a href="{{route('admin.index')}}"><i class="fas fa-users mr-2"></i>Admins</a></li>
             <li><a href="{{route('super_admin.index')}}"><i class="fas fa-user-cog mr-2"></i>Super Admin</a></li>
             <li class="nav-item">

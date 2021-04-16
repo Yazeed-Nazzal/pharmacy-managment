@@ -26,7 +26,7 @@ class SearchController extends Controller
             $drugs = $drugs->where('price',$price);
         }
 
-        
+    
 
         return view('search.filter_drug',compact('drugs'));
     }

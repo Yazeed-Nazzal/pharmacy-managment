@@ -4,7 +4,7 @@
 
 <header class="page-header">
     <div class="container-fluid">
-        <h2 class="no-margin-bottom">Add Drug</h2>
+        <h2 class="no-margin-bottom">Add Alternative Drug</h2>
     </div>
 </header>
 
@@ -13,10 +13,10 @@
         <div class="col-lg-12 mt-5">
             <div class="card">
             <div class="card-header d-flex align-items-center">
-                <h3 class="h4">Add Drug Information</h3>
+                <h3 class="h4">Add Alternative Drug Information</h3>
             </div>
             <div class="card-body">
-                <form class="form-horizontal" action="{{route('drug.store')}}" method="POST" enctype="multipart/form-data">
+                <form class="form-horizontal" action="{{route('alternative_drug.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="line"></div>
                 <div class="form-group row">
@@ -88,7 +88,20 @@
                     @enderror
                     </div>
                 </div>
-                
+                <div class="line"></div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Select Drug Alternative </label>
+                    <div class="col-sm-9">
+                    <select name="alternative_drug" class="form-control">
+                        @foreach($drugs as $drug)
+                                <option value="{{$drug->id}}" class="form-control">{{$drug->name}}</option>
+                        @endforeach
+                    </select>
+                    @error('alternative_drug')
+                        <div class="alert alert-danger mt-2">{{$message}}</div>
+                    @enderror
+                    </div>
+                </div>
                 <div class="line"></div>
                 <div class="form-group row">
                     <label class="col-sm-3 form-control-label">Image</label>
