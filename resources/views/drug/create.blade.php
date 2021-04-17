@@ -88,7 +88,20 @@
                     @enderror
                     </div>
                 </div>
-                
+                <div class="line"></div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Select Drug Alternative </label>
+                    <div class="col-sm-9">
+                    <select name="alternative_drug" class="form-control">
+                        @foreach($drugs as $drug)
+                                <option value="{{$drug->id}}" class="form-control">{{$drug->name}}</option>
+                        @endforeach
+                    </select>
+                    @error('alternative_drug')
+                        <div class="alert alert-danger mt-2">{{$message}}</div>
+                    @enderror
+                    </div>
+                </div>
                 <div class="line"></div>
                 <div class="form-group row">
                     <label class="col-sm-3 form-control-label">Image</label>

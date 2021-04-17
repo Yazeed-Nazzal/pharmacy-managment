@@ -21,13 +21,15 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/statistices',[App\Http\Controllers\StatisticesController::class,'statistices'])->name('statistices');
     Route::resource('drug',App\Http\Controllers\DrugController::class);
-    Route::resource('admin',App\Http\Controllers\AdminController::class);
-    Route::resource('super_admin',App\Http\Controllers\SuperAdminController::class);
-    Route::resource('alternative_drug',App\Http\Controllers\AlternativeDrugController::class);
+    // Route::resource('alternative_drug',App\Http\Controllers\AlternativeDrugController::class);
     Route::get('/search',[App\Http\Controllers\SearchController::class , 'search'])->name('search');
     Route::post('/filter',[App\Http\Controllers\SearchController::class , 'search'])->name('filter');
 });
 
+Route::group(['middleware'=>['auth','can:show admins section','can:show super admins section']],function(){
+    Route::resource('admin',App\Http\Controllers\AdminController::class);
+    Route::resource('super_admin',App\Http\Controllers\SuperAdminController::class);
+});
 
 
 

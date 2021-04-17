@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Drug;
 use Illuminate\Http\Request;
+use App\Models\Image;
+use Illuminate\Support\Facades\File;
 
 class DrugController extends Controller
 {
@@ -25,8 +27,8 @@ class DrugController extends Controller
      */
     public function create()
     {
-        
-        return view('drug.create');
+        $drugs = Drug::all();
+        return view('drug.create',compact('drugs'));
     }
 
     /**
@@ -45,7 +47,8 @@ class DrugController extends Controller
             'count'=>'required',
             'expired_date'=>'required',
             'place'=>'required',
-            'image_drug'=>'required'
+            'image_drug'=>'required',
+            
         ]);
 
          $drug = Drug::create([
@@ -57,6 +60,7 @@ class DrugController extends Controller
             'expired_date'=>$data['expired_date'],
             'place'=>$data['place'],
             'buying_count'=>0,
+            'alternative_id'=>$request->alternative_drug,
         ]);
 
         if($request->hasFile('image_drug')){
@@ -89,8 +93,8 @@ class DrugController extends Controller
      */
     public function edit(Drug $drug)
     {
-        
-        return view('drug.edit',compact('drug'));
+        $drugs = Drug::all();
+        return view('drug.edit',compact('drug','drugs'));
     }
 
     /**
@@ -120,14 +124,22 @@ class DrugController extends Controller
             'count'=>$data['count'],
             'expired_date'=>$data['expired_date'],
             'place'=>$data['place'],
+            'alternative_id'=>$request->alternative_drug,
         ]);
 
+        if($request->hasFile('image_drug')){
+            $image_drug = Image::where('imageable_id',$drug->id)->get();
+            $image_path = public_path('uploads') .'\\'. $image_drug[0]->name;
+            File::delete($image_path);
+            $drug->image()->where('imageable_id',$drug->id)->delete();
+
+        }
+       
         if($request->hasFile('image_drug')){
             $image_name = rand(0,9999).'_'.$request->image_drug->getClientOriginalName();
             $request->image_drug->move(public_path('uploads'),$image_name);
             $drug->image()->create(array('name' => $image_name));   
         }
-        
         session()->flash('success','Update Drug Information Successfully');
 
         return redirect()->route('drug.index');

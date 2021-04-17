@@ -15,18 +15,18 @@ class SearchController extends Controller
         $drugs =  Drug::get();
        
         if($name){
-            $drugs =  $drugs->where('name',$name);
+            $drugs =  Drug::where('name','like','%'.$name.'%')->get();
         }
 
         if($s_name){
-            $drugs = $drugs->where('s_name','like',$s_name);
+            $drugs = Drug::where('s_name','like','%'.$s_name.'%')->get();
         }
 
         if($price){
-            $drugs = $drugs->where('price',$price);
+            $drugs = Drug::where('price',$price)->get();
         }
 
-    
+     
 
         return view('search.filter_drug',compact('drugs'));
     }

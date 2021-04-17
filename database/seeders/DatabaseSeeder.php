@@ -23,6 +23,13 @@ class DatabaseSeeder extends Seeder
         $admin_create->assignRole($admin);
         $super_admin_create->assignRole($super_admin);
 
+        $permission_admin = Permission::create(['name' => 'show admins section']);
+        $permission_super_admin = Permission::create(['name' => 'show super admins section']);
+        
+
+        $super_admin->givePermissionTo($permission_admin);
+        $super_admin->givePermissionTo($permission_super_admin);
+        
         Drug::factory()->count(10)->create();
     }
 }
