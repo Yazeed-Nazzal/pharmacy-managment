@@ -26,8 +26,6 @@ class SearchController extends Controller
             $drugs = Drug::where('price',$price)->get();
         }
 
-     
-
-        return view('search.filter_drug',compact('drugs'));
+        return view('filter',compact('drugs'));
     }
 }
