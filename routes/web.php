@@ -24,6 +24,8 @@ Route::group(['middleware'=>'auth'],function(){
     // Route::resource('alternative_drug',App\Http\Controllers\AlternativeDrugController::class);
     Route::get('/search',[App\Http\Controllers\SearchController::class , 'search'])->name('search');
     Route::post('/filter',[App\Http\Controllers\SearchController::class , 'search'])->name('filter');
+    Route::get('/cart',[\App\Http\Controllers\CartController::class,'index']);
+    Route::get('/receipt',[\App\Http\Controllers\CartController::class,'receipt']);
 });
 
 Route::group(['middleware'=>['auth','can:show admins section','can:show super admins section']],function(){

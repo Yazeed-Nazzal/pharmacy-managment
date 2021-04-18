@@ -43,22 +43,22 @@
             <div class="navbar-holder d-flex align-items-center justify-content-between">
               <!-- Navbar Header-->
               <div class="navbar-header">
-                <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
+                <!-- Navbar Brand --><a href="/" class="navbar-brand d-none d-sm-inline-block">
                   <div class="brand-text d-none d-lg-inline-block"><strong>Dashboard</strong></div>
                   <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div></a>
                 <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
               </div>
               <!-- Navbar Menu -->
-              <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">     
+              <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
                 <!-- Logout    -->
                 <li class="nav-item">
                 <a  class="nav-link" href="#" role="button">
-                    
+
                 </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link logout" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();"> 
+                        document.getElementById('logout-form').submit();">
                         <span class="d-none d-sm-inline">Logout</span>
                         <i class="fas fa-sign-out-alt"></i>
                     </a>
@@ -71,13 +71,13 @@
           </div>
         </nav>
       </header>
-      <div class="page-content d-flex align-items-stretch"> 
+      <div class="page-content d-flex align-items-stretch">
         <!-- Side Navbar -->
         <nav class="side-navbar">
-        
+
           <ul class="list-unstyled">
             <li class="active"><a href="{{route('statistices')}}"> <i class="far fa-chart-bar mr-2"></i>Statistices </a></li>
-            <li><a href="tables.html"> <i class="fas fa-cart-arrow-down mr-2"></i>Cart</a></li>
+            <li><a href="/cart"> <i class="fas fa-cart-arrow-down mr-2"></i>Cart</a></li>
             <li><a href="{{route('search')}}"> <i class="fas fa-search mr-2"></i>Search</a></li>
             <li><a href="{{route('drug.index')}}"> <i class="fas fa-capsules mr-2 "></i>Drugs </a></li>
             @can('show admins section')
@@ -88,7 +88,7 @@
             @endcan
             <li class="nav-item">
                 <a href="{{ route('logout') }}" class="nav-link logout" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();"> 
+                    document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt mr-2"></i>
                     <span class="d-none d-sm-inline">Logout</span>
                 </a>
@@ -98,10 +98,10 @@
             </li>
         </nav>
         <div class="content-inner">
-         
-          
+
+
           @yield("content")
-          
+
           <!-- Page Footer-->
           <footer class="main-footer">
             <div class="container-fluid">

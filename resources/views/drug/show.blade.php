@@ -21,6 +21,7 @@
             <p><strong>Plcae :</strong> {{$drug->place}}</p>
             <p><strong>Expired Date :</strong> {{$drug->expired_date}}</p>
             <p><strong>Description :</strong> {{$drug->description}}</p>
+            <p class="text-right"><button class="btn btn-primary"><a href="" style="color: white">Add To Cart</a></button></p>
         </div>
     </div>
 </div>

@@ -10,7 +10,7 @@
     </div>
 </header>
 
-<section class="tables">  
+<section class="tables">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -32,7 +32,7 @@
                     <h3 class="h4">Drugs Table</h3>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">  
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -46,13 +46,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @php 
+                        @php
                             $number_drug = 1 ;
                         @endphp
                         @foreach($drugs as $drug)
                         <tr>
                             <th>
-                                <?php 
+                                <?php
                                     echo $number_drug;
                                     $number_drug = $number_drug+1;
                                 ?>
@@ -63,21 +63,21 @@
                             <th>{{$drug->count}}</th>
                             <th>{{$drug->expired_date}}</th>
                             <th style="display:flex;justify-content:space-between">
-                               
+
                              <form action="{{route('drug.destroy',$drug->id)}}" method="POST">
-                                 @csrf 
+                                 @csrf
                                  @method('delete')
                               <button type="submit" class="p-2 btn btn-primary"><i class="fas fa-trash-alt"></i></button>
                              </form>
                              <form action="{{route('drug.edit',$drug->id)}}" method="POST">
-                                @csrf 
+                                @csrf
                                 @method('GET')
-                              <button type="submit" class="p-2 btn btn-primary"><i class="fas fa-edit"></i></button>  
+                              <button type="submit" class="p-2 btn btn-primary"><i class="fas fa-edit"></i></button>
                              </form>
                              <form action="{{route('drug.show',$drug->id)}}" method="POST">
-                                @csrf 
+                                @csrf
                                 @method('GET')
-                              <button type="submit" class="p-2 btn btn-primary"><i class="fas fa-eye"></i></button>  
+                              <button type="submit" class="p-2 btn btn-primary"><i class="fas fa-eye"></i></button>
                              </form>
                            </th>
                         </tr>
@@ -90,4 +90,5 @@
         </div>
     </div>
 </div>
+</section>
 @endsection

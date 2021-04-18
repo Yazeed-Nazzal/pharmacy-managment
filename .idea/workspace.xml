@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79ea3dac-40d2-478f-b1be-72a9ee80e8fb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/pharmacy-managment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pharmacy-managment.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/drug/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/drug/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/drug/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/drug/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/dashbord.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/dashbord.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +169,9 @@
       <workItem from="1617560768174" duration="1269000" />
       <workItem from="1618436300478" duration="1197000" />
       <workItem from="1618523258634" duration="2810000" />
-      <workItem from="1618600558127" duration="5814000" />
+      <workItem from="1618600558127" duration="6572000" />
+      <workItem from="1618687927066" duration="18000" />
+      <workItem from="1618778573269" duration="3388000" />
     </task>
     <servers />
   </component>
