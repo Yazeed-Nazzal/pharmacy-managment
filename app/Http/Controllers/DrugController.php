@@ -48,7 +48,7 @@ class DrugController extends Controller
             'expired_date'=>'required',
             'place'=>'required',
             'image_drug'=>'required',
-            
+
         ]);
 
          $drug = Drug::create([
@@ -66,9 +66,9 @@ class DrugController extends Controller
         if($request->hasFile('image_drug')){
             $image_name = rand(0,9999).'_'.$request->image_drug->getClientOriginalName();
             $request->image_drug->move(public_path('uploads'),$image_name);
-            $drug->image()->create(array('name' => $image_name));   
+            $drug->image()->create(array('name' => $image_name));
         }
-        
+
         session()->flash('success','Add Drug Successfully');
 
         return redirect()->route('drug.index');
@@ -82,7 +82,14 @@ class DrugController extends Controller
      */
     public function show(Drug $drug)
     {
-        return view('drug.show',compact('drug'));
+        if ($drug->alternative_id == null){
+            $alternativeDrugs = Drug::where('alternative_id',$drug->id)->get();
+
+        }
+        else{
+            $alternativeDrugs = Drug::where('id',$drug->alternative_id)->get();
+        }
+        return view('drug.show',compact('drug','alternativeDrugs'));
     }
 
     /**
@@ -134,11 +141,11 @@ class DrugController extends Controller
             $drug->image()->where('imageable_id',$drug->id)->delete();
 
         }
-       
+
         if($request->hasFile('image_drug')){
             $image_name = rand(0,9999).'_'.$request->image_drug->getClientOriginalName();
             $request->image_drug->move(public_path('uploads'),$image_name);
-            $drug->image()->create(array('name' => $image_name));   
+            $drug->image()->create(array('name' => $image_name));
         }
         session()->flash('success','Update Drug Information Successfully');
 

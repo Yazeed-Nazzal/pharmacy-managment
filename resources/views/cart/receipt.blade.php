@@ -7,34 +7,24 @@
                 <div class="receipt">
                     <header class="receipt__header">
                         <p class="receipt__title text-primary">
-                            Codepen Sweet Shop
+                            Pharmacy
                         </p>
-                        <p class="receipt__date">13 December 2020</p>
+                        <p class="receipt__date">{{now()}}</p>
                     </header>
                     <dl class="receipt__list">
-                        <div class="receipt__list-row">
-                            <dt class="receipt__item">CSS Candies</dt>
-                            <dd class="receipt__cost">£9.99</dd>
+                        @php
+                            $total = 0
+                        @endphp
+                        @foreach($records as $record)
+                            @php($total += $record->drug->price * $record->count)
+                        <div class="receipt__list-row receipt__list-row--total">
+                            <dt class="receipt__item">{{$record->drug->name}}</dt>
+                            <dd class="receipt__cost">{{$record->drug->price * $record->count }}$</dd>
                         </div>
-                        <div class="receipt__list-row">
-                            <dt class="receipt__item">HoTML Chocolate</dt>
-                            <dd class="receipt__cost">£4.19</dd>
-                        </div>
-                        <div class="receipt__list-row">
-                            <dt class="receipt__item">Jelly Scripts</dt>
-                            <dd class="receipt__cost">£3.99</dd>
-                        </div>
-                        <div class="receipt__list-row">
-                            <dt class="receipt__item">JamStack Crisps</dt>
-                            <dd class="receipt__cost">£5.99</dd>
-                        </div>
-                        <div class="receipt__list-row">
-                            <dt class="receipt__item">Sherbet Nodes</dt>
-                            <dd class="receipt__cost">£2.59</dd>
-                        </div>
+                        @endforeach
                         <div class="receipt__list-row receipt__list-row--total">
                             <dt class="receipt__item">Total</dt>
-                            <dd class="receipt__cost">£26.75</dd>
+                            <dd class="receipt__cost">{{$total}}$</dd>
                         </div>
                     </dl>
                 </div>

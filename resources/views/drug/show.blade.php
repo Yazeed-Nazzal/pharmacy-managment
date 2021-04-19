@@ -21,7 +21,29 @@
             <p><strong>Plcae :</strong> {{$drug->place}}</p>
             <p><strong>Expired Date :</strong> {{$drug->expired_date}}</p>
             <p><strong>Description :</strong> {{$drug->description}}</p>
-            <p class="text-right"><button class="btn btn-primary"><a href="" style="color: white">Add To Cart</a></button></p>
+            @if (isset($alternativeDrugs))
+                <h3 class="text-primary mb-3">alternative Drugs</h3>
+                <div>
+                    @foreach($alternativeDrugs as $alternativeDrug )
+                        <form class="d-flex justify-content-between w-25 ml-5 " action="{{route('drug.show',$alternativeDrug->id)}}" method="POST">
+                            @csrf
+                            @method('GET')
+                            <p ><strong>Name : </strong>{{$alternativeDrug->name}}</p>
+                            <button  class="p-2 btn btn-primary"><i type="submit" class="fas fa-eye"></i></button>
+                        </form>
+                    @endforeach
+                </div>
+
+            @endif
+            <p>
+                    <form class="text-right" action="/cart/{{$drug->id}}" method="POST">
+                        @csrf
+                        <button class="btn btn-primary" @if ($drug->count<=0)disabled @endif @if ($drug->count<=5) onclick="alert('you have lack in this drug')"
+
+                        @endif>Add To Cart  <i class="fas fa-cart-plus"></i></button>
+                    </form>
+
+            </p>
         </div>
     </div>
 </div>

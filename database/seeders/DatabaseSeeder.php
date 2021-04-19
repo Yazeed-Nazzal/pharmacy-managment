@@ -25,11 +25,11 @@ class DatabaseSeeder extends Seeder
 
         $permission_admin = Permission::create(['name' => 'show admins section']);
         $permission_super_admin = Permission::create(['name' => 'show super admins section']);
-        
+
 
         $super_admin->givePermissionTo($permission_admin);
         $super_admin->givePermissionTo($permission_super_admin);
-        
-        Drug::factory()->count(10)->create();
+
+
     }
 }

@@ -36,19 +36,22 @@
                                     <tbody>
                                     @php
                                         $number_drug = 1 ;
+                                        $total = 0
                                     @endphp
+                                        @foreach($records as $record)
+                                            @php($total += $record->drug->price * $record->count);
                                         <tr>
                                             <td>
                                                 <?php
-                                                echo $number_drug;
-                                                $number_drug = $number_drug+1;
+                                                echo $number_drug++;
+
                                                 ?>
                                             </td>
                                             <td><img src="{{asset('/uploads/2444_download (3).jfif')}}" width="100" height="100" alt=""></td>
-                                            <td>test</td>
-                                            <td>2</td>
-                                            <td>30</td>
-                                            <td>60</td>
+                                            <td>{{$record->drug->name}}</td>
+                                            <td>{{$record->drug->price}}</td>
+                                            <td>{{$record->count}}</td>
+                                            <td>{{$record->drug->price * $record->count }}</td>
                                             <td style="display:flex;justify-content:space-between">
 
                                                 <form action="" method="POST">
@@ -59,6 +62,7 @@
                                             </td>
 
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -71,8 +75,13 @@
                             <h3 class="h4">Total Price</h3>
                         </div>
                         <div class="card-body d-flex justify-content-between">
-                            <p>500$</p>
-                            <button class="btn btn-primary"><a style="color: white" href="/receipt">CheckOut</a></button>
+                            <div>
+                                <p>{{$total}}$</p>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary"><a style="color: white" href="/receipt">CheckOut</a></button>
+                                <button class="btn btn-primary"><a style="color: white" href="/receipt/cancel">Cancel</a></button>
+                            </div>
                         </div>
                     </div>
 

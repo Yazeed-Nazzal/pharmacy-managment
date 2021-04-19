@@ -57,12 +57,12 @@
                                     $number_drug = $number_drug+1;
                                 ?>
                             </th>
-                            <th><img src="{{url('uploads/'.$drug->image->name)}}" width="100" height="100" alt=""></th>
-                            <th>{{$drug->name}}</th>
-                            <th>{{$drug->price}}</th>
-                            <th>{{$drug->count}}</th>
-                            <th>{{$drug->expired_date}}</th>
-                            <th style="display:flex;justify-content:space-between">
+                            <td><img src="{{url('uploads/'.$drug->image->name)}}" width="100" height="100" alt=""></td>
+                            <td>{{$drug->name}}</td>
+                            <td>{{$drug->price}}</td>
+                            <td>{{$drug->count}}</td>
+                            <td>{{$drug->expired_date}}</td>
+                            <td style="display:flex;justify-content:space-between">
 
                              <form action="{{route('drug.destroy',$drug->id)}}" method="POST">
                                  @csrf
@@ -79,7 +79,13 @@
                                 @method('GET')
                               <button type="submit" class="p-2 btn btn-primary"><i class="fas fa-eye"></i></button>
                              </form>
-                           </th>
+                                <form action="/cart/{{$drug->id}}" method="POST">
+                                    @csrf
+                                   <button class="btn btn-primary" @if ($drug->count<=0)disabled @endif @if ($drug->count<=5) onclick="alert('you have lack in this drug')"
+
+                                       @endif><i class="fas fa-cart-plus"></i></button>
+                                </form>
+                           </td>
                         </tr>
                         @endforeach
                         </tbody>

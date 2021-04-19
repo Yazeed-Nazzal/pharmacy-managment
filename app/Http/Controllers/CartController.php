@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Drug;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -14,7 +15,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('cart.cart');
+        $records = Cart::all();
+        return view('cart.cart',compact('records'));
     }
 
     /**
@@ -33,9 +35,36 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request ,Drug $drug)
     {
-        //
+        $record =Cart::where('drug_id',$drug->id)->first();
+        $drug->count = $drug->count -1;
+        $drug->save();
+        if ($drug->count <- 0){
+            abort('404');
+        }
+        else{
+            if ($record){
+
+                $record->count = $record->count +1;
+
+                $record->save();
+
+
+            }
+            else{
+                Cart::create([
+                    'drug_id'=>$drug->id,
+                    'admin_id'=>auth()->user()->id,
+                    'count' => 1
+                ]);
+
+            }
+
+        }
+
+        return back();
+
     }
 
     /**
@@ -84,6 +113,26 @@ class CartController extends Controller
     }
     public function receipt()
     {
-        return view('cart.receipt');
+        $records = Cart::all();
+        Cart::truncate();
+        foreach ($records as $record){
+          $drug = Drug::find($record->drug_id);
+          $drug->count = $drug->count - $record->count;
+          $drug->save();
+
+        }
+        return view('cart.receipt',compact('records'));
     }
+    public function cancel (){
+        $records = Cart::all();
+        foreach ($records as $record){
+            $drug = Drug::find($record->drug_id);
+            $drug->count = $drug->count + $record->count;
+            $drug->save();
+        }
+        Cart::truncate();
+        return redirect(route('statistices'));
+
+    }
+
 }

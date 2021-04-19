@@ -25,7 +25,9 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/search',[App\Http\Controllers\SearchController::class , 'search'])->name('search');
     Route::post('/filter',[App\Http\Controllers\SearchController::class , 'search'])->name('filter');
     Route::get('/cart',[\App\Http\Controllers\CartController::class,'index']);
+    Route::post('/cart/{drug}',[\App\Http\Controllers\CartController::class,'store']);
     Route::get('/receipt',[\App\Http\Controllers\CartController::class,'receipt']);
+    Route::get('/receipt/cancel',[\App\Http\Controllers\CartController::class,'cancel']);
 });
 
 Route::group(['middleware'=>['auth','can:show admins section','can:show super admins section']],function(){

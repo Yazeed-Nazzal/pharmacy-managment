@@ -9,7 +9,7 @@
     </div>
 </header>
 
-<section class="tables">  
+<section class="tables">
     <div class="container-fluid">
         <form action="{{route('filter')}}" method="POST">
             @csrf
@@ -21,7 +21,7 @@
                         <input type="text" name="s_name" placeholder="Enter sience Name" class="form-control">
                     </div>
                     <div class="col-lg-3">
-                        <input type="number" name="price" placeholder="Enter Prcie" class="form-control">        
+                        <input type="number" name="price" placeholder="Enter Prcie" class="form-control">
                     </div>
                     <div class="col-lg-1">
                         <button type="submit" class="btn btn-primary mb-3 float-right">filter</button>
@@ -36,7 +36,7 @@
                     <h3 class="h4">Drugs Table</h3>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">  
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         @if(count($drugs) > 0 )
                         <thead>
@@ -52,25 +52,32 @@
                         </thead>
                         @endif
                         <tbody>
-                        @php 
+                        @php
                             $number_drug = 1 ;
                         @endphp
 
                         @if(count($drugs) > 0 )
                             @foreach($drugs as $drug)
                             <tr>
-                                <th>
-                                    <?php 
+                                <td>
+                                    <?php
                                         echo $number_drug;
                                         $number_drug = $number_drug+1;
                                     ?>
-                                </th>
-                                <th><img src="{{url('uploads/'.$drug->image->name)}}" width="100" height="100" alt=""></th>
-                                <th>{{$drug->name}}</th>
-                                <th>{{$drug->price}}</th>
-                                <th>{{$drug->count}}</th>
-                                <th>{{$drug->expired_date}}</th>
-                                <th><button class="btn btn-primary"><i class="fas fa-cart-plus"></i></a></th>
+                                </td>
+                                <td><img src="{{url('uploads/'.$drug->image->name)}}" width="100" height="100" alt=""></td>
+                                <td>{{$drug->name}}</td>
+                                <td>{{$drug->price}}</td>
+                                <td>{{$drug->count}}</td>
+                                <td>{{$drug->expired_date}}</td>
+                                <td>
+                                <form action="/cart/{{$drug->id}}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-primary" @if ($drug->count<=0)disabled @endif @if ($drug->count<=5) onclick="alert('you have lack in this drug')"
+
+                                        @endif><i class="fas fa-cart-plus"></i></button>
+                                </form>
+                                </td>
                             @endforeach
                         @else
                            <div class="alert alert-warning">Not Found Drag</div>
