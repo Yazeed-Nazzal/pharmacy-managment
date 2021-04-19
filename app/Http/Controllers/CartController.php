@@ -118,6 +118,7 @@ class CartController extends Controller
         foreach ($records as $record){
           $drug = Drug::find($record->drug_id);
           $drug->count = $drug->count - $record->count;
+          $drug->buying_count = $drug->buying_count + 1;
           $drug->save();
 
         }
