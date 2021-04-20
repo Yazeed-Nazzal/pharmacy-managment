@@ -38,8 +38,9 @@
                                         $number_drug = 1 ;
                                         $total = 0
                                     @endphp
-                                        @foreach($records as $record)
-                                            @php($total += $record->drug->price * $record->count);
+                                        
+                                        @for($i=0;$i<$records->count();$i++)
+                                            @php($total += $records[$i]['price'] * $records[$i]['count']);
                                         <tr>
                                             <td>
                                                 <?php
@@ -47,11 +48,11 @@
 
                                                 ?>
                                             </td>
-                                            <td><img src="{{asset('/uploads/2444_download (3).jfif')}}" width="100" height="100" alt=""></td>
-                                            <td>{{$record->drug->name}}</td>
-                                            <td>{{$record->drug->price}}</td>
-                                            <td>{{$record->count}}</td>
-                                            <td>{{$record->drug->price * $record->count }}</td>
+                                            <td><img src="{{url('uploads/'.$records[$i]['image'])}}" width="100" height="100" alt=""></td>
+                                            <td>{{$records[$i]['name']}}</td>
+                                            <td>{{$records[$i]['price']}}</td>
+                                            <td>{{$records[$i]['count']}}</td>
+                                            <td>{{$records[$i]['price'] * $records[$i]['count']}}</td>
                                             <td style="display:flex;justify-content:space-between">
 
                                                 <form action="" method="POST">
@@ -62,7 +63,7 @@
                                             </td>
 
                                         </tr>
-                                        @endforeach
+                                        @endfor
                                     </tbody>
                                 </table>
                             </div>

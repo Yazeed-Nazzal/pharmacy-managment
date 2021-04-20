@@ -14,8 +14,20 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $records = Cart::all();
+    {   
+        
+          
+            $records = Cart::with('drug')->get()->map(function($item){
+            $drug = Drug::with('image')->where('id',$item->drug_id)->first();
+            $cart = Cart::where('drug_id',$drug->id)->first();
+            return [
+                'image'=>$drug->image->name,
+                'name'=>$drug->name,
+                'price'=>$drug->price,
+                'count'=>$cart->count,
+            ];
+        });
+       
         return view('cart.cart',compact('records'));
     }
 
@@ -40,7 +52,7 @@ class CartController extends Controller
         $record =Cart::where('drug_id',$drug->id)->first();
         $drug->count = $drug->count -1;
         $drug->save();
-        if ($drug->count <- 0){
+        if ($drug->count <= 0){
             abort('404');
         }
         else{
@@ -49,7 +61,6 @@ class CartController extends Controller
                 $record->count = $record->count +1;
 
                 $record->save();
-
 
             }
             else{
