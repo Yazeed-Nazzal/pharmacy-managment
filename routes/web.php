@@ -18,7 +18,7 @@ Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'login'])->na
 Auth::routes(["register"=>false]);
 
 Route::group(['middleware'=>'auth'],function(){
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/statistices',[App\Http\Controllers\StatisticesController::class,'statistices'])->name('statistices');
     Route::resource('drug',App\Http\Controllers\DrugController::class);
     // Route::resource('alternative_drug',App\Http\Controllers\AlternativeDrugController::class);
@@ -28,6 +28,9 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('/cart/{drug}',[\App\Http\Controllers\CartController::class,'store']);
     Route::get('/receipt',[\App\Http\Controllers\CartController::class,'receipt']);
     Route::get('/receipt/cancel',[\App\Http\Controllers\CartController::class,'cancel']);
+    Route::get('all_drug_expired',[\App\Http\Controllers\StatisticesController::class,'all_drug_expired'])->name('all_drug_expired');
+    Route::get('all_drug_finish',[\App\Http\Controllers\StatisticesController::class,'all_drug_finish'])->name('all_drug_finish');
+
 });
 
 Route::group(['middleware'=>['auth','can:show admins section','can:show super admins section']],function(){
